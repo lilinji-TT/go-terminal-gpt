@@ -71,7 +71,7 @@ func GenerateStreamWithGPT(prompt string, history *[]model.Message) {
 		for _, char := range message.Choices[0].Delta.Content {
 			content += string(char)
 			fmt.Print(string(char))
-			time.Sleep(100 * time.Millisecond)
+			time.Sleep(10 * time.Millisecond)
 		}
 	}
 
