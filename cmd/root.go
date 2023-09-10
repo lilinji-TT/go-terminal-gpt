@@ -1,9 +1,6 @@
 package cmd
 
 import (
-	"GTG/model"
-	"GTG/pkg/gpt"
-	"bufio"
 	"fmt"
 	"os"
 
@@ -17,9 +14,6 @@ var rootCmd = &cobra.Command{
 }
 
 
-var chatCmd = &cobra.Command{
-	Use: "chat",
-}
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
@@ -28,26 +22,8 @@ func Execute() {
 	}
 }
 
-var GlobMessages []model.Message
-func chat(cmd *cobra.Command, args []string){
-	//创建读取用户输入的scanner
-	scanner := bufio.NewScanner(os.Stdin)
-	//循环读取
-	for {
-		fmt.Print("User >>")
-		scanner.Scan()
-		userInput := scanner.Text()
-		if (userInput == "exit") {
-			break
-		}
-		fmt.Print("GPT >>")
-		gpt.GenerateStreamWithGPT(userInput, &GlobMessages)
-		fmt.Println()
-	}
-}
 
 func init() {
 	rootCmd.AddCommand(chatCmd)
-
-	chatCmd.Run = chat
+	rootCmd.AddCommand(promptCmd)
 }
