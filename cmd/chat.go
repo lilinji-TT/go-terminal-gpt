@@ -20,13 +20,13 @@ func Chat(cmd *cobra.Command, args []string){
 	scanner := bufio.NewScanner(os.Stdin)
 	//循环读取
 	for {
-		fmt.Print("User >>")
+		fmt.Print("User ~ % ")
 		scanner.Scan()
 		userInput := scanner.Text()
 		if (userInput == "exit") {
 			break
 		}
-		fmt.Print("GPT >>")
+		fmt.Print("GPT ~ % ")
 		gpt.GenerateStreamWithGPT(userInput, &GlobMessages)
 		fmt.Println()
 	}
