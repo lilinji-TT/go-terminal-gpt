@@ -16,6 +16,7 @@ var promptCmd = &cobra.Command{
 
 
 func init(){
+	rootCmd.AddCommand(promptCmd)
 	promptCmd.Run = func (cmd *cobra.Command, args []string){
 		scanner := bufio.NewScanner(os.Stdin)
 		fmt.Print("You are setting prompt >> ")

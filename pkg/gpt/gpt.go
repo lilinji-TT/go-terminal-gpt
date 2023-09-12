@@ -27,9 +27,16 @@ func GenerateStreamWithGPT(prompt string, history *[]model.Message) {
 		fmt.Printf("Error: %s", err)
 		return
 	}
-	req, err := http.NewRequest("POST", config.BaseURL, bytes.NewBuffer(jsonBody))
+
+	BaseUrl, OpenaiKey, err := config.ReadConfig()
+	if err != nil {
+		fmt.Printf("Error: %s", err)
+		return
+	}
+
+	req, err := http.NewRequest("POST", BaseUrl, bytes.NewBuffer(jsonBody))
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", "Bearer "+config.OpenaiKey)
+	req.Header.Set("Authorization", "Bearer "+ OpenaiKey)
 	if err != nil {
 		fmt.Printf("Error: %s", err)
 		return
