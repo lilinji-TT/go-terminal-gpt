@@ -47,6 +47,7 @@ func GenerateStreamWithGPT(prompt string, history *[]model.Message) {
 		fmt.Printf("Error: %s", err)
 		return
 	}
+
 	defer resp.Body.Close()
 
 	reader := bufio.NewReader(resp.Body)
@@ -62,9 +63,11 @@ func GenerateStreamWithGPT(prompt string, history *[]model.Message) {
 			continue
 		}
 
+		//去除data: 避免解析错误
 		var message model.ResponseBodyJSON
 		jsonString := strings.TrimPrefix(line, "data: ")
 
+		//判断是否结束，结束了就跳出
 		if strings.Contains(jsonString, "DONE") {
 			break
 		}
