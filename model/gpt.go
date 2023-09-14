@@ -30,4 +30,12 @@ type ResponseBodyJSON struct {
 	} `json:"choices"`
 }
 
+type ErrorResponse struct {
+	Error struct{
+		Message string `json:"message"`
+		Type    string `json:"type"`
+		Param   string `json:"param"`
+		Code    string `json:"code"`
+	} `json:"error"`
+}
 

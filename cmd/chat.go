@@ -16,28 +16,35 @@ var chatCmd = &cobra.Command{
 }
 
 var GlobMessages []model.Message
-func Chat(cmd *cobra.Command, args []string){
 
-	isConfig := missConfig()
+func Chat(cmd *cobra.Command, args []string) {
 
-	if isConfig {
+	if missConfig() {
 		fmt.Println("Please set your config, url and api key. GTG config -u <your url> -k <your api key>")
 		return
 	}
 
-	fmt.Println("Welcome To Use GoTermiGPT")
-	//创建读取用户输入的scanner
+	fmt.Println("Welcome To Use GoTerminalGPT")
+
 	scanner := bufio.NewScanner(os.Stdin)
-	//循环读取
+
 	for {
+		fmt.Println()
 		fmt.Print("User ~ % ")
 		scanner.Scan()
+		fmt.Println()
 		userInput := scanner.Text()
-		if (userInput == "exit") {
+		if userInput == "exit" {
 			break
 		}
-		fmt.Print("GPT ~ % ")
-		gpt.GenerateStreamWithGPT(userInput, &GlobMessages)
+
+		if userInput == "model" {
+			config.SetModelName(userInput)
+			continue
+		}
+
+		fmt.Printf("%s ~ %% ", config.Model)
+		gpt.GenerateStreamWithGPT(userInput, &GlobMessages, config.Model)
 		fmt.Println()
 	}
 }
@@ -47,7 +54,7 @@ func missConfig() bool {
 	return err != nil || len(url) == 0 || len(key) == 0
 }
 
-func init(){
+func init() {
 	rootCmd.AddCommand(chatCmd)
 	chatCmd.Run = Chat
 }

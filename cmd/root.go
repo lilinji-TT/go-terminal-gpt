@@ -8,11 +8,13 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:"GTG",
-	Short:"A short description.",
-	Long:"A longer description.",
+	Use:   "gtg",
+	Short: "A short description.",
+	Long:  "A longer description.",
+	Run: func(cmd *cobra.Command, args []string) {
+		chatCmd.Run(cmd, args)
+	},
 }
-
 
 func Execute() {
 	err := rootCmd.Execute()
