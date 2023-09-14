@@ -39,7 +39,7 @@ func Chat(cmd *cobra.Command, args []string) {
 		}
 
 		if userInput == "model" {
-			config.SetModelName(userInput)
+			config.SetModelName()
 			continue
 		}
 

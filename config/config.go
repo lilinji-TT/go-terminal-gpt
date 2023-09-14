@@ -64,7 +64,7 @@ func ReadConfig() (string, string, error) {
 	return lines[0], lines[1], nil
 }
 
-func SetModelName(name string) {
+func SetModelName() {
 	err := survey.Ask(modelOptions, &Model)
 
 	if err != nil {
