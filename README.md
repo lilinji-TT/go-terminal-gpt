@@ -24,7 +24,7 @@ GTG.exe
 ./GTG
 ```
 
-3.model
+5.model
 
 ```shell
 Welcome To Use GoTerminalGPT
@@ -39,4 +39,10 @@ User ~ % model
 > gpt-3.5-turbo
   gpt-3.5-turbo-16k
   gpt-4
+```
+
+
+6.exit
+```shell
+User ~ % exit
 ```
