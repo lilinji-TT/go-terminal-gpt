@@ -4,6 +4,7 @@ import (
 	"GTG/config"
 	"GTG/model"
 	"GTG/pkg/gpt"
+	utils "GTG/utils/functions"
 	"bufio"
 	"fmt"
 	"os"
@@ -40,6 +41,11 @@ func Chat(cmd *cobra.Command, args []string) {
 
 		if userInput == "model" {
 			config.SetModelName()
+			continue
+		}
+
+		if userInput == "new chat" {
+			utils.OpenCmd()
 			continue
 		}
 

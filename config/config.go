@@ -38,6 +38,9 @@ func WriteConfig(url string, key string) error {
 	if err != nil {
 		log.Fatal(err)
 	}
+	if len(url) == 0 || len(key) == 0 {
+		return fmt.Errorf("Please set your config, url and api key. GTG config -u <your url> -k <your api key>")
+	}
 	data := url + " " + key
 	configPath := filepath.Join(home, ".config_gtg")
 	err = os.WriteFile(configPath, []byte(data), 0644)
