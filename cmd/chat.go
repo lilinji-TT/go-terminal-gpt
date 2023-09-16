@@ -8,6 +8,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"runtime"
 
 	"github.com/spf13/cobra"
 )
@@ -20,10 +21,13 @@ var GlobMessages []model.Message
 
 func Chat(cmd *cobra.Command, args []string) {
 
+
 	if missConfig() {
 		fmt.Println("Please set your config, url and api key. GTG config -u <your url> -k <your api key>")
 		return
 	}
+
+	goos := runtime.GOOS // 获取操作系统
 
 	fmt.Println("Welcome To Use GoTerminalGPT")
 
@@ -45,7 +49,18 @@ func Chat(cmd *cobra.Command, args []string) {
 		}
 
 		if userInput == "new chat" {
-			utils.OpenCmd()
+			fmt.Println(goos)
+			switch goos {
+			case "darwin":
+				utils.OpenTerminal()
+			case "linux":
+				fmt.Println("Sorry! Linux is not supported.")
+			case "windows":
+				utils.OpenCmd()
+			default:
+				fmt.Printf("Unknown OS: %s\n", goos)
+			}
+
 			continue
 		}
 
